@@ -3,6 +3,9 @@
         
         
         <VueSidebarMenu />
+        <Containervendas />
+        
+
        
        <button class="btn-sair" @click="signOut" >Sair</button>
        
@@ -19,6 +22,8 @@
   import { useRouter } from 'vue-router'
   import { onBeforeUnmount } from 'vue'
   import VueSidebarMenu from '../components/VueSidebarMenu'
+  import Containerprodutos from '../components/Containerprodutos'
+  import Containervendas from '../components/Containervendas'
  
 
   const router = useRouter()

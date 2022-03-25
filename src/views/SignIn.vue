@@ -1,6 +1,7 @@
 
   
 <template>
+<body class="home">
 
 <div class="container">
 <h1>Login</h1>
@@ -13,14 +14,20 @@
   </div>
  <p v-if="errMsg">{{ errMsg }}</p>
    <button @click="signIn">Entrar</button>
-</div>
-   
+     
+     <div class="registrar">
+       <router-link to="/register"> ainda não tem conta? </router-link> 
+   </div>
+   </div>
+   </body>
 </template>
 
 
 
 
 <script setup>
+
+  
 
   import { ref } from 'vue'
   import firebase from 'firebase/compat/app';
@@ -39,7 +46,7 @@
       .signInWithEmailAndPassword(email.value, password.value) // THIS LINE CHANGED
       .then((data) => {
         console.log('Successfully logged in!');
-        router.push('/') // redirect to the feed
+        router.push('/home') // redirect to the feed
       })
       .catch(error => {
         switch (error.code) {
@@ -59,20 +66,41 @@
   
 </script>
  
-<style scoped>
+<style scoped >
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300&display=swap');
-*{
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-     background-color: #ffff;
-    
+
+
+
+
+
+body { 
+  border: none;
+  background-size: cover;
+  margin-top: 0px;
+    margin-right: 0px;
+    margin-bottom: 0px;
+    margin-left: 0px;
+  height: 100vh !important;
+  background-color: #993399 !important;
+  overflow: hidden !important;
+  
+  
+ 
+  
+  
+  
+  
+
 }
 h1{
     margin-top: 100px;
     text-align: center;
 }
+
+
+
+
 
 .container {
     width: 350px;
@@ -84,9 +112,19 @@ h1{
     box-shadow: 0 0 5px rgba(0,0,1,3);
     padding: 30px 4%;
     border-radius: 15px;
-font-family: 'Poppins', sans-serif;
+    font-family: 'Poppins', sans-serif;
+     
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    background-color: #ffff;
+    overflow: hidden !important;
 }
-
+.registrar {
+  position:relative;
+  padding-top: 20px;
+  margin-left: 80px;
+}
 .container div.single-input{
     position: relative;
     margin: 40px 10px;
@@ -98,7 +136,7 @@ font-family: 'Poppins', sans-serif;
 .container div.single-input input{
     position: relative;
     border-radius: 10px;
-    width:100%;
+    width:80%;
     height: 30px;
     padding: 7px;
     border: 0;
@@ -106,6 +144,7 @@ font-family: 'Poppins', sans-serif;
     outline: 0;
     font-size:15px;
     font-family: 'Poppins', sans-serif;
+    margin-left: 18px;
 }
 .container div.single-input input:focus {
 border-bottom: 2px solid #993399;

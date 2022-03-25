@@ -1,4 +1,5 @@
 <template>
+<body>
 <div class="container">
 <h1>Registre-se</h1>
   <div class="single-input">
@@ -11,14 +12,15 @@
  <p v-if="errMsg">{{ errMsg }}</p>
    <button @click="register">Criar Conta</button>
 </div>
+</body>
    
 </template>
 
 <script setup>
   import { ref } from 'vue'
   import firebase from 'firebase/compat/app';
-import 'firebase/compat/auth';
-import 'firebase/compat/firestore';
+  import 'firebase/compat/auth';
+  import 'firebase/compat/firestore';
   import { useRouter } from 'vue-router' // import router
  
  
@@ -27,7 +29,7 @@ import 'firebase/compat/firestore';
   const router = useRouter() // get a reference to our vue router
   const register = () => {
     firebase
-      .auth() // get the auth api
+      () .auth// get the auth api
       .createUserWithEmailAndPassword(email.value, password.value) // need .value because ref()
       .then((data) => {
         console.log('Successfully registered!');
@@ -43,6 +45,19 @@ import 'firebase/compat/firestore';
 
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300&display=swap');
+
+body { 
+  border: none;
+  background-size: cover;
+  margin-top: 0px;
+    margin-right: 0px;
+    margin-bottom: 0px;
+    margin-left: 0px;
+  height: 100vh !important;
+  background-color: #993399 !important;
+  overflow: hidden !important;
+}
+
 *{
     padding: 0;
     margin: 0;
