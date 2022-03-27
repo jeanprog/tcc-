@@ -16,7 +16,7 @@
             hiddenOnCollapse: true
           },
           {
-            href: '/Caixa',
+            href: '/Cashier',
             title: 'caixa',
             icon: " fas fa-donate"
           },
@@ -26,8 +26,8 @@
             icon: 'fa fa-plus-square',
             child: [
               {
-                href: '/Cadastroprodutos',
-                title: 'produtos'
+                href: '/RegisterProducts',
+                title: 'products'
               }
             ]
          

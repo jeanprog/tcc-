@@ -1,8 +1,8 @@
 <template>
   <body>
         
-        
-        <VueSidebarMenu />
+        >
+
        
        <button class="btn-sair" @click="signOut" >Sair</button>
        
@@ -18,8 +18,9 @@
   import firebase from 'firebase/compat/app'
   import { useRouter } from 'vue-router'
   import { onBeforeUnmount } from 'vue'
-  import VueSidebarMenu from '../components/VueSidebarMenu'
- 
+  
+  
+  
 
   const router = useRouter()
   const isLoggedIn = ref(true)

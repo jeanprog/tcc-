@@ -2,28 +2,33 @@
   <body>
         
         
+       
         <VueSidebarMenu />
-        <Containerusuarios />
-
-       
+  <form>
+       <input type="text" placeholder="Name Products" v-model="name"/>
+   </form>     
        <button class="btn-sair" @click="signOut" >Sair</button>
-       
+         <button class="btn-adicionarproduto" @click="click" >adicionar</button>
+       <p>nome é: {{name}} </p>
       </body>
 </template>
 
 
 // @ is an alias to /src
-<script setup>
+<script setup >
+ 
 
- 
-  import { ref, watchEffect } from 'vue' // used for conditional rendering
-  import firebase from 'firebase/compat/app'
-  import { useRouter } from 'vue-router'
-  import { onBeforeUnmount } from 'vue'
-  import VueSidebarMenu from '../components/VueSidebarMenu'
+
+
+import {db } from '../../main'
+import { ref, watchEffect } from 'vue' // used for conditional rendering
+import firebase from 'firebase/compat/app'
+import { useRouter } from 'vue-router'
+import { onBeforeUnmount } from 'vue'
+import VueSidebarMenu from '../../components/VueSidebarMenu'
+import {insertDB} from './Service'
   
-  import Containerusuarios from '../components/Containerusuarios'
- 
+  
 
   const router = useRouter()
   const isLoggedIn = ref(true)
@@ -35,6 +40,7 @@
         isLoggedIn.value = false // if we do not
       }
   })
+  
   const signOut = () => {
     firebase.auth().signOut()
     router.push('/')
@@ -51,6 +57,12 @@
       authListener()
         })
 
+const click = () => {
+  insertDB ().then (()=> console.log ('salvei'))
+}
+
+   
+    
 
 </script>
 
@@ -64,9 +76,23 @@ body {
   background-color: #ffff !important;
   overflow: hidden !important;
   width: 100%;
+  display: block;
   
   
 }
+
+.btn-adicionarproduto {
+
+  margin-left: 400px;
+}
+
+p{
+  margin-left: 400px;
+}
+input  {
+  margin-left: 400px;
+}
+
 
  .btn-sair { 
    

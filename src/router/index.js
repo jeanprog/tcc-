@@ -5,36 +5,33 @@ const router = createRouter({
   routes: [
     {
       path: "/",
-      component: () => import("../views/SignIn.vue"),
+      component: () => import("../views/SignIn/SignIn.vue"),
     },
     {
-      path: "/register",
-      component: () => import("../views/Register.vue"),
+      path: "/Register",
+      component: () => import("../views/Register/Register.vue"),
     },
     {
-      path: "/home",
-      component: () => import("../views/Home.vue"),
+      path: "/Home",
+      component: () => import("../views/Home/Home.vue"),
     },
     
     {
-      path: "/Cadastroprodutos",
-      component: () => import("../views/Cadastroprodutos.vue"),
+      path: "/RegisterProducts",
+      component: () => import("../views/Products/RegisterProducts.vue"),
     },
     {
-      path: "/Caixa",
-      component: () => import("../views/Caixa.vue"),
+      path: "/Cashier",
+      component: () => import("../views/Cashier/Cashier.vue"),
     },
     {
-      path: "/Vendas",
-      component: () => import("../views/Vendas.vue"),
+      path: "/ListSales",
+      component: () => import("../views/Cashier/ListSales/ListSales.vue"),
     },
+   
     {
-      path: "/Estoque",
-      component: () => import("../views/Estoque.vue"),
-    },
-    {
-      path: "/Usuarios",
-      component: () => import("../views/Usuarios.vue"),
+      path: "/Users",
+      component: () => import("../views/Users/Users.vue"),
     },
 
   ],

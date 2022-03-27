@@ -2,8 +2,9 @@
   <body>
         
         
-        <VueSidebarMenu />
-        <Containercaixa />
+        
+        
+        
 
        
        <button class="btn-sair" @click="signOut" >Sair</button>
@@ -20,9 +21,9 @@
   import firebase from 'firebase/compat/app'
   import { useRouter } from 'vue-router'
   import { onBeforeUnmount } from 'vue'
-  import VueSidebarMenu from '../components/VueSidebarMenu'
   
-  import Containercaixa from '../components/Containercaixa'
+  
+  
  
 
   const router = useRouter()

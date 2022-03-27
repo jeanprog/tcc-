@@ -2,9 +2,8 @@
   <body>
         
         
-        <VueSidebarMenu />
-        <Containerprodutos />
-
+        
+    
        
        <button class="btn-sair" @click="signOut" >Sair</button>
        
@@ -19,9 +18,12 @@
   import { ref, watchEffect } from 'vue' // used for conditional rendering
   import firebase from 'firebase/compat/app'
   import { useRouter } from 'vue-router'
-  import { onBeforeUnmount } from 'vue'
-  import VueSidebarMenu from '../components/VueSidebarMenu'
-  import Containerprodutos from '../components/Containerprodutos'
+  import { onBeforeUnmount } from 'vue' 
+
+
+  
+  
+  
  
 
   const router = useRouter()
