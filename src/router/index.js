@@ -1,40 +1,47 @@
-import { createRouter, createWebHistory } from "vue-router";
+import { createRouter, createWebHistory } from 'vue-router'
+
+import Home from '../views/Home/Home.vue'
+import SignIn from  '../views/SignIn'
+import Register from '../views/Register/'
+import Products from '../views/Products/RegisterProducts'
+import Cashier from '../views/Cashier/Cashier'
+import ListSales from '../views/Cashier/ListSales/ListSales'
+import Users from '../views/Users'
 
 const router = createRouter({
-  history: createWebHistory(),
-  routes: [
-    {
-      path: "/",
-      component: () => import("../views/SignIn/SignIn.vue"),
-    },
-    {
-      path: "/Register",
-      component: () => import("../views/Register/Register.vue"),
-    },
-    {
-      path: "/Home",
-      component: () => import("../views/Home/Home.vue"),
-    },
-    
-    {
-      path: "/RegisterProducts",
-      component: () => import("../views/Products/RegisterProducts.vue"),
-    },
-    {
-      path: "/Cashier",
-      component: () => import("../views/Cashier/Cashier.vue"),
-    },
-    {
-      path: "/ListSales",
-      component: () => import("../views/Cashier/ListSales/ListSales.vue"),
-    },
-   
-    {
-      path: "/Users",
-      component: () => import("../views/Users/Users.vue"),
-    },
+    history: createWebHistory(),
+    routes: [
+        {
+            path: '/',
+            component: SignIn,
+        },
+        {
+            path: '/register',
+            component: Register,
+        },
+        {
+            path: '/home',
+            component: Home,
+        },
 
-  ],
-});
+        {
+            path: '/register-products',
+            component: Products,
+        },
+        {
+            path: '/cashier',
+            component: Cashier,
+        },
+        {
+            path: '/list-sales',
+            component: ListSales,
+        },
 
-export default router;
+        {
+            path: '/users',
+            component: Users,
+        },
+    ],
+})
+
+export default router

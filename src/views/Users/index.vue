@@ -1,21 +1,16 @@
 <template>
     <body>
-        <VueSidebarMenu />
-        <form>
-            <input v-model="name" type="text" placeholder="Name Products" />
-        </form>
+        >
+
         <button class="btn-sair" @click="signOut">Sair</button>
-        <button class="btn-adicionarproduto" @click="click">adicionar</button>
-        <p>nome é: {{ name }}</p>
     </body>
 </template>
 
 // @ is an alias to /src
 <script setup>
-import { ref, onBeforeUnmount } from 'vue' // used for conditional rendering
+import { ref,onBeforeUnmount } from 'vue' // used for conditional rendering
 import firebase from 'firebase/compat/app'
 import { useRouter } from 'vue-router'
-import { insertDB } from './Service'
 
 const router = useRouter()
 const isLoggedIn = ref(true)
@@ -27,7 +22,6 @@ firebase.auth().onAuthStateChanged(function (user) {
         isLoggedIn.value = false // if we do not
     }
 })
-
 const signOut = () => {
     firebase.auth().signOut()
     router.push('/')
@@ -36,7 +30,7 @@ const signOut = () => {
 const authListener = firebase.auth().onAuthStateChanged(function (user) {
     if (!user) {
         // not logged in
-        alert('voce precisa estar logado para acessar essa rota')
+        // alert('voce precisa estar logado para acessar essa rota')
         router.push('/')
     }
 })
@@ -44,10 +38,6 @@ onBeforeUnmount(() => {
     // clear up listener
     authListener()
 })
-
-const click = () => {
-    insertDB().then(() => console.log('salvei'))
-}
 </script>
 
 <style scoped>
@@ -57,18 +47,6 @@ body {
     background-color: #ffff !important;
     overflow: hidden !important;
     width: 100%;
-    display: block;
-}
-
-.btn-adicionarproduto {
-    margin-left: 400px;
-}
-
-p {
-    margin-left: 400px;
-}
-input {
-    margin-left: 400px;
 }
 
 .btn-sair {
