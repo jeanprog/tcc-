@@ -1,12 +1,12 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
 import Home from '../views/Home/Home.vue'
-import SignIn from  '../views/SignIn'
-import Register from '../views/Register/'
-import Products from '../views/Products/RegisterProducts'
-import Cashier from '../views/Cashier/Cashier'
-import ListSales from '../views/Cashier/ListSales/ListSales'
-import Users from '../views/Users'
+import SignIn from '../views/SignIn/SignIn.vue'
+import Register from '../views/Register/Register.vue'
+import Products from '../views/Products/RegisterProducts.vue'
+import Cashier from '../views/Cashier/Cashier.vue'
+import ListSales from '../views/Cashier/ListSales/ListSales.vue'
+import Users from '../views/Users/Users.vue'
 
 const router = createRouter({
     history: createWebHistory(),

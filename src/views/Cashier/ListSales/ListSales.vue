@@ -6,10 +6,9 @@
 
 // @ is an alias to /src
 <script setup>
-import { ref, watchEffect } from 'vue' // used for conditional rendering
+import { ref, onBeforeUnmount } from 'vue' // used for conditional rendering
 import firebase from 'firebase/compat/app'
 import { useRouter } from 'vue-router'
-import { onBeforeUnmount } from 'vue'
 
 const router = useRouter()
 const isLoggedIn = ref(true)

@@ -1,10 +1,8 @@
-import { db } from '../../main'
-
 const insertDB = async () => {
-    const docRef = db.collection('products').doc('products')
+    /* const docRef = db.collection('products').doc('products')
 
     await docRef.set({})
-    console.log('entrei')
+    console.log('entrei') */
 }
 
-export { insertDB }
+export default insertDB

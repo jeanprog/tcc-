@@ -15,7 +15,7 @@
 import { ref, onBeforeUnmount } from 'vue' // used for conditional rendering
 import firebase from 'firebase/compat/app'
 import { useRouter } from 'vue-router'
-import { insertDB } from './Service'
+import insertDB from './Service'
 
 const router = useRouter()
 const isLoggedIn = ref(true)
@@ -36,7 +36,7 @@ const signOut = () => {
 const authListener = firebase.auth().onAuthStateChanged(function (user) {
     if (!user) {
         // not logged in
-        alert('voce precisa estar logado para acessar essa rota')
+        // alert('voce precisa estar logado para acessar essa rota')
         router.push('/')
     }
 })

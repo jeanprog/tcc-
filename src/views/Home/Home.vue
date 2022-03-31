@@ -7,7 +7,7 @@
 
 // @ is an alias to /src
 <script setup>
-import { ref , onBeforeUnmount} from 'vue' // used for conditional rendering
+import { ref, onBeforeUnmount } from 'vue' // used for conditional rendering
 import firebase from 'firebase/compat/app'
 import { useRouter } from 'vue-router'
 
