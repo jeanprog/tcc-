@@ -4,25 +4,25 @@
             <label for="form-user-name">Nome</label>
             <input
                 id="form-user-name"
+                v-model="name"
                 type="name"
                 placeholder="Nome"
-                v-model="name"
             />
             <label for="form-user-email">Email</label>
             <input
                 id="form-user-email"
+                v-model="email"
                 type="email"
                 placeholder="Email"
-                v-model="email"
             />
             <label for="form-user-telefone">Telefone</label>
             <input
                 id="form-user-telefone"
+                v-model="telefone"
                 type="text"
                 placeholder="Telefone"
-                v-model="telefone"
             />
-            <button type="submit">Adicionar  Usuário</button>
+            <button type="submit">Adicionar Usuário</button>
         </form>
     </body>
 </template>
@@ -31,30 +31,31 @@
 <script>
 import UserDataService from './UserDataService'
 
-
-
 export default {
-    name: "add-user",
+    name: 'AddUser',
     data() {
         return {
             id: null,
             name: '',
             email: '',
-            telefone: ''
+            telefone: '',
         }
     },
     methods: {
-        handleSubmit(event){
-            UserDataService.createUser({name: this.name, email: this.email, telefone: this.telefone}).then(() => {
+        handleSubmit() {
+            UserDataService.createUser({
+                name: this.name,
+                email: this.email,
+                telefone: this.telefone,
+            }).then(() => {
                 console.log('salvei')
                 this.name = ''
                 this.email = ''
                 this.telefone = ''
             })
-        }
-    }
+        },
+    },
 }
-
 </script>
 
 <style scoped>

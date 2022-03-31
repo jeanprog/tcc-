@@ -1,7 +1,7 @@
 import { createApp } from 'vue'
 
 // Your web app's Firebase configuration
-import './config/firebase.js'
+import './config/firebase'
 import VueSidebarMenu from 'vue-sidebar-menu'
 import 'vue-sidebar-menu/dist/vue-sidebar-menu.css'
 

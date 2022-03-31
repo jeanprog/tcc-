@@ -1,12 +1,10 @@
 import { db } from '../../config/firebase'
 
-
 class UserDataService {
-
     createUser(user) {
-        return db.collection('users').add(user)
+        this.user = user
+        return db.collection('users').add(this.user)
     }
-
 }
 
-export default new UserDataService();
+export default new UserDataService()
