@@ -1,43 +1,51 @@
-import { createRouter, createWebHistory } from "vue-router";
+import { createRouter, createWebHistory } from 'vue-router'
+import listProducts from '../views/Products/listproducts/ListProducts.vue'
+import template from '../components/template.vue'
+import SignIn from '../views/SignIn/SignIn.vue'
+import Register from '../views/Register/Register.vue'
+import Products from '../views/Products/RegisterProducts.vue'
+import Cashier from '../views/Cashier/Cashier.vue'
+import ListSales from '../views/Cashier/ListSales/ListSales.vue'
+import Users from '../views/Users/Users.vue'
 
 const router = createRouter({
-  history: createWebHistory(),
-  routes: [
-    {
-      path: "/",
-      component: () => import("../views/SignIn.vue"),
-    },
-    {
-      path: "/register",
-      component: () => import("../views/Register.vue"),
-    },
-    {
-      path: "/home",
-      component: () => import("../views/Home.vue"),
-    },
-    
-    {
-      path: "/Cadastroprodutos",
-      component: () => import("../views/Cadastroprodutos.vue"),
-    },
-    {
-      path: "/Caixa",
-      component: () => import("../views/Caixa.vue"),
-    },
-    {
-      path: "/Vendas",
-      component: () => import("../views/Vendas.vue"),
-    },
-    {
-      path: "/Estoque",
-      component: () => import("../views/Estoque.vue"),
-    },
-    {
-      path: "/Usuarios",
-      component: () => import("../views/Usuarios.vue"),
-    },
+    history: createWebHistory(),
+    routes: [
+        {
+            path: '/',
+            component: SignIn,
+        },
+        {
+            path: '/register',
+            component: Register,
+        },
+        {
+            path: '/template',
+            component: template,
+        },
 
-  ],
-});
+        {
+            path: '/register-products',
+            component: Products,
+        },
+        {
+            path: '/list-products',
+            component: listProducts,
+        },
+        {
+            path: '/cashier',
+            component: Cashier,
+        },
+        {
+            path: '/list-sales',
+            component: ListSales,
+        },
 
-export default router;
+        {
+            path: '/users',
+            component: Users,
+        },
+    ],
+})
+
+export default router
