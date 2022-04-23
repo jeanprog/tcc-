@@ -36,7 +36,7 @@
 
 // @ is an alias to /src
 <script>
-import DataService from './DataService'
+import { createProduct } from './DataService'
 
 export default {
     name: 'Addproducts ',
@@ -51,7 +51,7 @@ export default {
     },
     methods: {
         handleProducts() {
-            DataService.createProduct({
+            createProduct({
                 name: this.name,
                 description: this.description,
                 prince: this.prince,
