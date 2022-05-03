@@ -2,23 +2,34 @@
 
 import { db } from '../../config/firebase'
 
+class DataService {
+    createProduct(Products) {
+        this.Products = Products
+        return db.collection('products').add(this.Products)
+    } 
 
-const createProduct = (products) => {
-    return db.collection('products').add(products)
-} 
-
-const getProducts = async () => {
-    return await db.collection('products').get()
-}
-
-
-
-
-export {
-    createProduct,
-    getProducts
+    methods() {
     
+    this.listarProdutos = [];
+        db.collection('products').get().then (snapshot => {
+            snapshot.forEach(doc => {
+                let objectProduct = {};
+                objectProduct = doc.data ();
+                objectProduct.id = doc.id;
+                this.listarProdutos.push(objectProduct);
+                console.log(objectProduct);
+                
+            })
+        }).catch (error => {
+            console.log(error);
+        })
+      return this.listarProdutos;
+    }
 }
+console.log ('entrei')
+
+export default new DataService()
+
 
 
 

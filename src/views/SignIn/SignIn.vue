@@ -1,5 +1,5 @@
-<template >
-    <section class="home">
+<template>
+    <body class="home">
         <div class="container">
             <h1>Login</h1>
             <div class="single-input">
@@ -13,13 +13,13 @@
                 />
             </div>
             <p v-if="errMsg">{{ errMsg }}</p>
-            <button class ="btn-login" @click="signIn">Entrar</button>
+            <button @click="signIn">Entrar</button>
 
             <div class="registrar">
                 <router-link to="/register"> ainda não tem conta? </router-link>
             </div>
         </div>
-    </section>
+    </body>
 </template>
 
 <script setup>
@@ -40,7 +40,7 @@ const signIn = () => {
         .signInWithEmailAndPassword(email.value, password.value) // THIS LINE CHANGED
         .then(() => {
             console.log('Successfully logged in!')
-            router.push('/cashier') // redirect to the feed
+            router.push('/template') // redirect to the feed
         })
         .catch(error => {
             switch (error.code) {
@@ -62,29 +62,24 @@ const signIn = () => {
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300&display=swap');
 
-
-.home {
-  
-    background-size: cover !important;
-    margin-top: 0px!important;;
-    margin-right:0px!important;; 
-    margin-bottom:0px!important;;
-    margin-left: 0px!important;;
-    background-color: #993399 !important;
+body {
+    border: none;
+    background-size: cover;
+    margin-top: 0px;
+    margin-right: 0px;
+    margin-bottom: 0px;
+    margin-left: 0px;
     height: 100vh !important;
-    width: 100% !important;
-    position: absolute;
-    
-  
+    background-color: #993399 !important;
+    overflow: hidden !important;
 }
 h1 {
-    margin-top: 60px!important;
+    margin-top: 100px;
     text-align: center;
 }
 
 .container {
-    width: 370px;
-    height: 70vh;
+    width: 350px;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -104,11 +99,11 @@ h1 {
 .registrar {
     position: relative;
     padding-top: 20px;
-    margin-left: 90px!important;
+    margin-left: 80px;
 }
 .container div.single-input {
     position: relative;
-    margin: 40px 10px !important;
+    margin: 40px 10px;
     width: 100%;
 }
 
@@ -123,13 +118,13 @@ h1 {
     outline: 0;
     font-size: 15px;
     font-family: 'Poppins', sans-serif;
-    margin-left: 22px !important;
+    margin-left: 18px;
 }
 .container div.single-input input:focus {
     border-bottom: 2px solid #993399;
 }
 
- .btn-login{
+button {
     background: #993399;
     color: white;
 
@@ -139,13 +134,12 @@ h1 {
 
     font-family: 'Poppins', sans-serif;
     text-shadow: none;
-    margin-left: 15% !important;
-    margin-top: 8% !important;
+    margin-left: 15%;
     position: relative;
     border: none;
 }
 
-.btn-login:hover  {
+button:hover {
     background: #e0bcdd;
     cursor: pointer;
 }

@@ -65,13 +65,12 @@ body {
     background-color: #ffff;
 }
 h1 {
-    margin-top: 70px !important;
+    margin-top: 100px;
     text-align: center;
 }
 
 .container {
-    width: 350px!important;
-    height: 70vh !important;
+    width: 350px;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -85,15 +84,15 @@ h1 {
 
 .container div.single-input {
     position: relative;
-    margin: 40px 10px !important;
-    width: 100%!important;
+    margin: 40px 10px;
+    width: 100%;
 }
 
 .container div.single-input input {
     position: relative;
     border-radius: 10px;
-    width: 100% !important;
-    height: 30px !important;
+    width: 100%;
+    height: 30px;
     padding: 7px;
     border: 0;
     border-bottom: 2px solid rgb(200, 200, 200);
@@ -111,12 +110,11 @@ button {
 
     border-radius: 10px;
     height: 50px;
-    width: 70% !important;
+    width: 70%;
 
     font-family: 'Poppins', sans-serif;
     text-shadow: none;
-    margin-left: 15% !important;
-    margin-top: 15% !important;
+    margin-left: 15%;
     position: relative;
     border: none;
 }
