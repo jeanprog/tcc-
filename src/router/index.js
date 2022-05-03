@@ -26,10 +26,12 @@ const router = createRouter({
 
         {
             path: '/register-products',
+            name: 'RegisterProducts',
             component: Products,
         },
         {
             path: '/list-products',
+            name: 'list',
             component: listProducts,
         },
         {

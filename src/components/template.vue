@@ -2,16 +2,18 @@
     
   
         
-        <div class="side-bar" v-if ="isLoggedIn">
+      
+         <div class="side-bar" v-if ="isLoggedIn">
         <VueSidebarMenu />
         </div>
             <body>
         
               <router-view />
+              
         </body>
         
-        <div class="btn" v-if = "isLoggedIn">
-        <button class="btn-sair" @click="signOut">Sair</button>
+        <div class="btn-sair">
+        <button  v-if = "isLoggedIn " @click="signOut">Sair</button>
         </div>
     
 </template>
@@ -50,27 +52,36 @@ onBeforeUnmount(() => {
 })
 </script>
 
-<style scoped>
-body {
-    border: none !important;
-    height: 100vh !important;
-    background-color: #ffff !important;
-    overflow: hidden !important;
-    width: 100%;
+<style>
+*{
+margin: 0px!important;
+overflow: hidden !important;
+font-family: 'Poppins', sans-serif!important;
+
 }
-.btn-sair {
+
+body {
+    
+    background-color: #ffff !important;
+    
+    
+}
+
+.btn-sair button{
     background: #993399;
     color: white;
-
+    width: 100px;
     border-radius: 10px;
-    height: 5vh !important ;
-    width: 10% !important;
-
+    position:relative;
+    left: 85%;
+    
+    
+   
+    
     font-family: 'Poppins', sans-serif;
     text-shadow: none;
-    margin-left: 85% !important;
-    margin-top: 1% !important;
-    position: relative;
+  
+    
     border: none;
     cursor: pointer;
 }

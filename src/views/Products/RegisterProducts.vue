@@ -1,5 +1,5 @@
 <template>
-    <body>
+    <section class ="registerprod">
         <form className="new-product" @submit.prevent="handleProducts">
             <label for="form-user-name">Nome</label>
             <input
@@ -29,29 +29,54 @@
                 type="text"
                 placeholder=""
             />
-            <button type="submit">Adicionar produto</button>
+            <button type="submit">Salvar</button>
         </form>
-    </body>
+   </section>
 </template>
 
 // @ is an alias to /src
 <script>
-import DataService from './DataService'
+import { createProduct } from './DataService'
+import {getProducts} from './DataService'
+import { db } from '../../config/firebase'
 
 export default {
-    name: 'Addproducts ',
+    name: 'products ',
     data() {
         return {
-            id: null,
+            
+            id: '',
             name: '',
             description: '',
             prince: '',
             amount: '',
+            
         }
     },
+
+  created(){
+      this.id = this.$route.params.id
+      if(this.id){
+        db.collection('products').doc(this.id).get().then(snapshot => {
+          const objetoproducts = snapshot.data()
+          this.name = objetoproducts.name
+          this.description = objetoproducts.description
+          this.prince = objetoproducts.prince
+          this.amount = objetoproducts.amount
+        })
+      }
+    },  
+
     methods: {
+        saveProducts(){
+        if(this.id){
+          this.updateProduct();
+        } else {
+          this.handleProducts();
+        }
+      },
         handleProducts() {
-            DataService.createProduct({
+            createProduct({
                 name: this.name,
                 description: this.description,
                 prince: this.prince,
@@ -62,15 +87,79 @@ export default {
                 this.description = ''
                 this.prince = ''
                 this.amount = ''
+                this.$router.push({ name: 'list' });
             })
         },
+        updateProduct(){
+        db.collection('Products').doc(this.id).set().then(() => {
+          
+          
+          this.$router.push({ name: 'list' });
+          console.log ('atualizei')
+        })
+      },
     },
 }
 </script>
 
+
 <style scoped>
 
 
+.registerprod {
+  
     
+    margin-top: 0px!important;;
+    margin-right:0px!important;; 
+    margin-bottom:0px!important;;
+    margin-left: 255px!important;;
+    
+    height: 94vh !important;
+    width: 70% !important;
+    
+    top: 50px;
+}
+
+.new-product { 
+  position: relative!important;
+  display: flex!important; 
+  justify-content: center!important;
+  align-items: center!important;
+  margin-top: 100px !important;
+  flex-direction: column!important;
+  
+  height: 400px;
+
+}
+
+.new-product  input {
+  width: 300px;
+    border: 1px solid rgb(200, 200, 200);
+    outline: 0;
+    font-size: 15px;
+    padding: 7px;
+    border-radius: 10px;
+    
+}
+
+.new-product button {
+  background: #993399;
+    color: white;
+    width: 200px;
+    height: 30px;
+    border-radius: 10px;
+    position:relative;
+    top: 20px;
+    
+    
+   
+    
+    font-family: 'Poppins', sans-serif;
+    text-shadow: none;
+  
+    
+    border: none;
+    cursor: pointer;
+}
     
 </style>

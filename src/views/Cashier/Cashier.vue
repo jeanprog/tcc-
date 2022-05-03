@@ -1,66 +1,126 @@
 <template>
-    <body>
-        <button class="btn-sair" @click="signOut">Sair</button>
-    </body>
+ <section class="sales">
+     
+    <section class ="vendaprod">
+        <form className="new-product"  @change ="handleSales($event)">
+          <select name="product" id="product">
+             <option v-for="products in listProdutos"
+              :key="products.id" 
+              :value="products.name">{{ products.name }}
+              </option>
+      </select>
+            
+            <label for="form-user-description">tipo de pagamento</label>
+            <input
+                id="form-user-description"
+                v-model="payment"
+                type="text"
+                placeholder=""
+            />
+            <label for="form-user-prince">valor</label>
+            <input
+                id="form-user-prince"
+                v-model="prince"
+                type="text"
+                placeholder=""
+            />
+             <label for="form-user-amount">quantidade</label>
+            <input
+                id="form-user-amount"
+                v-model="amount"
+                type="text"
+                placeholder=""
+            />
+            <button type="submit">Salvar</button>
+        </form>
+   </section>
+      
+        
+        
+  
+        
+    </section>
 </template>
 
 // @ is an alias to /src
-<script setup>
-import { ref, onBeforeUnmount } from 'vue' // used for conditional rendering
-import firebase from 'firebase/compat/app'
-import { useRouter } from 'vue-router'
 
-const router = useRouter()
-const isLoggedIn = ref(true)
-// runs after firebase is initialized
-firebase.auth().onAuthStateChanged(function (user) {
-    if (user) {
-        isLoggedIn.value = true // if we have a user
-    } else {
-        isLoggedIn.value = false // if we do not
+
+
+<script>
+import { getProducts } from '../Products/DataService'
+import { ref } from 'vue';
+import {db} from '../../config/firebase'
+import {createSales} from './service'
+
+
+
+
+export default {
+    name: "listProducts",
+    components: {},
+    data() {
+        return {
+          
+             
+          listProdutos:[],
+          
+          
+           
+            id: '',
+            product: '',
+            payment: '',
+            prince: '',
+            amount: '',
+           
+        };
+        
+    },
+    created() {
+        this.listar()
+        
+    },
+   
+    
+    methods:{
+       listar() {
+        getProducts().then((snapshot) => {
+          this.listProdutos = [];
+          snapshot.forEach( doc => {
+            console.log (doc)
+            let objectProduct = {};
+                objectProduct = doc.data ();
+                objectProduct.id = doc.id;
+                
+            ref(this.listProdutos.push(objectProduct));
+          });
+        }); 
+      },
+   
+     
+        handleSales() {
+            createSales({
+                product: this.product,
+                payment: this.payment,
+                prince: this.prince,
+                amount: this.amount,
+            }).then(() => {
+                console.log('salvei')
+                this.product = ''
+                this.payment = ''
+                this.prince = ''
+                this.amount = ''
+                
+            })
+        },
+      
     }
-})
-const signOut = () => {
-    firebase.auth().signOut()
-    router.push('/')
 }
+    </script>
 
-const authListener = firebase.auth().onAuthStateChanged(function (user) {
-    if (!user) {
-        // not logged in
-        // alert('voce precisa estar logado para acessar essa rota')
-        router.push('/')
-    }
-})
-onBeforeUnmount(() => {
-    // clear up listener
-    authListener()
-})
-</script>
-
-<style scoped>
-body {
-    border: none !important;
-    height: 100vh !important;
-    background-color: #ffff !important;
-    overflow: hidden !important;
-    width: 100%;
-}
-
-.btn-sair {
-    background: #993399;
-    color: white;
-
-    border-radius: 10px;
-    height: 5vh !important ;
-    width: 10% !important;
-
-    font-family: 'Poppins', sans-serif;
-    text-shadow: none;
-    margin-left: 85% !important;
-    margin-top: 1% !important;
-    position: relative;
-    border: none;
-    cursor: pointer;
-}
-</style>
+    <style>
+ .sales {
+     flex-direction: column !important; 
+     margin-left: 300px !important;
+     
+ }
+    </style>
