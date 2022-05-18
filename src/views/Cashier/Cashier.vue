@@ -1,66 +1,169 @@
 <template>
-    <body>
-        <button class="btn-sair" @click="signOut">Sair</button>
-    </body>
+   <section class="sales">
+     
+    <section class ="vendaprod">
+        <form className="new-product"  @submit.prevent ="saveSales()">
+          <input type="text"  list="listin" v-model="productselected">
+          <datalist id="listin">
+             <option v-for="products in listProdutos"
+              :key="products.id" 
+               v-bind:value= "products.name + '|' + products.id" >{{ products.name }}
+              </option>
+          </datalist>
+            
+            <label for="form-user-description">tipo de pagamento</label>
+            <input
+                id="form-user-description"
+                v-model="payment"
+                type="text"
+                placeholder=""
+            />
+            <label for="form-user-prince">valor</label>
+            <input
+                id="form-user-prince"
+                v-model="prince"
+                type="text"
+                placeholder=""
+            />
+             <label for="form-user-amount">quantidade</label>
+            <input
+                id="form-user-amount"
+                v-model="amount"
+                type="text"
+                placeholder=""
+            />
+            <button type="submit">Salvar</button>
+        </form>
+   </section>
+      
+        
+        
+  
+        
+    </section>
 </template>
 
 // @ is an alias to /src
-<script setup>
-import { ref, onBeforeUnmount } from 'vue' // used for conditional rendering
-import firebase from 'firebase/compat/app'
-import { useRouter } from 'vue-router'
+<script>
+import { getProducts } from '../Products/DataService'
+import { ref } from 'vue';
+import {db} from '../../config/firebase'
+import {createSales} from './service'
 
-const router = useRouter()
-const isLoggedIn = ref(true)
-// runs after firebase is initialized
-firebase.auth().onAuthStateChanged(function (user) {
-    if (user) {
-        isLoggedIn.value = true // if we have a user
-    } else {
-        isLoggedIn.value = false // if we do not
-    }
-})
-const signOut = () => {
-    firebase.auth().signOut()
-    router.push('/')
-}
 
-const authListener = firebase.auth().onAuthStateChanged(function (user) {
-    if (!user) {
-        // not logged in
-        // alert('voce precisa estar logado para acessar essa rota')
-        router.push('/')
+export default {
+    name: "listProducts",
+    components: {},
+    data() {
+        return {
+          
+             
+          listProdutos:[],
+          
+          
+           
+            id: '',
+            productselected: {},
+            payment: '',
+            prince: '',
+            amount: '',
+           
+        };
+        
+    },
+    created (){
+       this.id = this.$route.params.id
+      if(this.id){
+          console.log('escreva alguma coisa')
+         db.collection('sales').doc(this.id)
+        .get()
+        .then(snapshot => {
+          const objetosales = snapshot.data()
+          this.productselected = objetosales.productselected
+          this.payment = objetosales.payment
+          this.prince = objetosales.prince
+          this.amount = objetosales.amount
+        
+          
+        })
+      }
+        else {
+            this.listar()
+        }  
+    
+     
+    },
+
+    
+    
+    methods:{
+
+        saveSales(){
+        if(this.id){
+          this.updateSales();
+          
+        } else {
+          this.handleSales();
+        }
+      },
+       listar() {
+        getProducts().then((snapshot) => {
+          this.listProdutos = [];
+          snapshot.forEach( doc => {
+            
+            let objectProduct = {};
+                objectProduct = doc.data ();
+                objectProduct.id = doc.id;
+                
+            ref(this.listProdutos.push(objectProduct));
+          });
+        }); 
+      },
+      
+     
+        handleSales() {
+        createSales({
+            
+              product: this.productselected,
+              payment: this.payment,
+              prince: this.prince,
+               amount: this.amount,
+           }).then(() => {
+                console.log('salvei')
+                this.productselected = ''
+                this.payment = ''
+                this.prince = ''
+                this.amount = ''
+               
+                this.$router.push({ name: 'ListSales'})
+            })
+        console.log(this.productselected)
+        },
+
+      updateSales () {
+           db.collection('sales').doc(this.id).set({productselected: this.productselected,
+                payment: this.payment,
+                prince: this.prince,
+                amount: this.amount,})
+                .then(() => {
+         
+          this.$router.push({ name: 'ListSales' });
+          console.log('atualizei')
+          window.alert("produto atualizado com sucesso")
+        })
+      },
+    updateProductamount () {
+    db.collection('products').doc(this.productselected).update({}).then(() =>
+             console.log('diminui o estoque') )}
+     
+     }
     }
-})
-onBeforeUnmount(() => {
-    // clear up listener
-    authListener()
-})
+          
 </script>
-
-<style scoped>
-body {
-    border: none !important;
-    height: 100vh !important;
-    background-color: #ffff !important;
-    overflow: hidden !important;
-    width: 100%;
-}
-
-.btn-sair {
-    background: #993399;
-    color: white;
-
-    border-radius: 10px;
-    height: 5vh !important ;
-    width: 10% !important;
-
-    font-family: 'Poppins', sans-serif;
-    text-shadow: none;
-    margin-left: 85% !important;
-    margin-top: 1% !important;
-    position: relative;
-    border: none;
-    cursor: pointer;
-}
-</style>
+ <style>
+ .sales {
+     flex-direction: column !important; 
+     margin-left: 300px !important;
+     
+ }
+    </style>

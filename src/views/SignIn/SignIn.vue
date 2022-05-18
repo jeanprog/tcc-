@@ -1,5 +1,6 @@
 <template>
-    <body class="home">
+    
+    <section class="home">
         <div class="container">
             <h1>Login</h1>
             <div class="single-input">
@@ -12,14 +13,14 @@
                     placeholder="Password"
                 />
             </div>
-            <p v-if="errMsg">{{ errMsg }}</p>
-            <button @click="signIn">Entrar</button>
-
+            <button class ="btn-login" @click="signIn">Entrar</button>
+           
             <div class="registrar">
                 <router-link to="/register"> ainda não tem conta? </router-link>
             </div>
-        </div>
-    </body>
+            </div>
+        </section>
+    
 </template>
 
 <script setup>
@@ -40,15 +41,17 @@ const signIn = () => {
         .signInWithEmailAndPassword(email.value, password.value) // THIS LINE CHANGED
         .then(() => {
             console.log('Successfully logged in!')
-            router.push('/template') // redirect to the feed
+            router.push('/cashier') // redirect to the feed
         })
         .catch(error => {
             switch (error.code) {
                 case 'auth/invalid-email':
                     errMsg.value = 'Invalid email'
+                    window.alert('email ou senha invalido')
                     break
                 case 'user-not-found':
                     errMsg.value = 'No account with that email was found'
+                    window.alert('sua conta nao existe')
                     break
 
                 default:
@@ -62,24 +65,31 @@ const signIn = () => {
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300&display=swap');
 
-body {
-    border: none;
-    background-size: cover;
-    margin-top: 0px;
-    margin-right: 0px;
-    margin-bottom: 0px;
-    margin-left: 0px;
-    height: 100vh !important;
+
+.home {
+  
+    background-size: cover !important;
+    margin-top: 0px!important;;
+    margin-right:0px!important;; 
+    margin-bottom:0px!important;;
+    margin-left: 0px!important;;
     background-color: #993399 !important;
-    overflow: hidden !important;
+    height: 100vh !important;
+    width: 100% !important;
+    position: absolute;
+}
+body {
+   width: 100% !important;
+    position: absolute;
 }
 h1 {
-    margin-top: 100px;
+    margin-top: 60px !important;
     text-align: center;
 }
 
 .container {
-    width: 350px;
+    width: 370px;
+    height: 70vh;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -99,11 +109,11 @@ h1 {
 .registrar {
     position: relative;
     padding-top: 20px;
-    margin-left: 80px;
-}
+    margin-left: 90px!important; 
+    }
 .container div.single-input {
     position: relative;
-    margin: 40px 10px;
+    margin: 40px 10px !important;
     width: 100%;
 }
 
@@ -118,7 +128,7 @@ h1 {
     outline: 0;
     font-size: 15px;
     font-family: 'Poppins', sans-serif;
-    margin-left: 18px;
+    margin-left: 22px !important;
 }
 .container div.single-input input:focus {
     border-bottom: 2px solid #993399;
@@ -134,7 +144,8 @@ button {
 
     font-family: 'Poppins', sans-serif;
     text-shadow: none;
-    margin-left: 15%;
+      margin-left: 15% !important;
+    margin-top: 8% !important;
     position: relative;
     border: none;
 }

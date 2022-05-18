@@ -10,10 +10,9 @@
               <router-view />
         </body>
         
-        <div class="btn" v-if = "isLoggedIn">
-        <button class="btn-sair" @click="signOut">Sair</button>
-        </div>
-    
+        <div class="btn-sair">
+        <button  v-if = "isLoggedIn " @click="signOut">Sair</button>
+    </div>
 </template>
 
 // @ is an alias to /src
@@ -50,28 +49,24 @@ onBeforeUnmount(() => {
 })
 </script>
 
-<style scoped>
-body {
-    border: none !important;
-    height: 100vh !important;
-    background-color: #ffff !important;
-    overflow: hidden !important;
-    width: 100%;
+<style >
+*{
+margin: 0px!important;
+overflow: hidden !important;
+font-family: 'Poppins', sans-serif!important;
+
 }
-.btn-sair {
+
+.btn-sair button{ 
+    cursor: pointer;
     background: #993399;
     color: white;
-
-    border-radius: 10px;
-    height: 5vh !important ;
-    width: 10% !important;
-
+    width: 100px;
+    order-radius: 10px;
+    position:relative;
+    left: 85%;
     font-family: 'Poppins', sans-serif;
     text-shadow: none;
-    margin-left: 85% !important;
-    margin-top: 1% !important;
-    position: relative;
     border: none;
-    cursor: pointer;
 }
 </style>

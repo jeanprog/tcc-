@@ -46,7 +46,6 @@ export default {
 
      created (){
       this.listar() 
-      
       },
      
      methods:{
@@ -65,30 +64,12 @@ export default {
         }); 
       },
       
-  edit(id) {
-     
-       
-      this.$router.push({ name: 'cashier' , params: {id: id}})
+     edit(idsales) {
+      this.$router.push({ name: 'cashier' , params: {id: idsales}})
 
-      
     },
-    
-     deleteSales(sales) {
-      console.log('evento acionado')
-      if (window.confirm("deseja mesmo deletar o produto?")) {
-      
-      
-          db.collection('sales').doc(sales.id).delete().then(() => {
-           window.alert("produto deletado com sucesso")
-           this.$router.push({ name: 'ListSales' });
-            
-          })
-          .catch((error) => {
-            console.error(error);
-          });
-      }
-     
-     },
+   
+
      
     }
 }   

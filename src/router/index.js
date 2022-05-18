@@ -6,6 +6,7 @@ import Register from '../views/Register/Register.vue'
 import Products from '../views/Products/RegisterProducts.vue'
 import Cashier from '../views/Cashier/Cashier.vue'
 import ListSales from '../views/Cashier/ListSales/ListSales.vue'
+import listsalesteste from '../views/Cashier/ListSales/listsalesteste.vue'
 import Users from '../views/Users/Users.vue'
 
 const router = createRouter({
@@ -26,19 +27,30 @@ const router = createRouter({
 
         {
             path: '/register-products',
+            name: 'RegisterProducts',
             component: Products,
         },
         {
             path: '/list-products',
+            name: 'list',
             component: listProducts,
         },
         {
             path: '/cashier',
+            name: 'cashier',
             component: Cashier,
         },
         {
-            path: '/list-sales',
+            path: '/listin-sales',
+            name: 'ListSales',
             component: ListSales,
+            
+        },
+        {
+            path: '/list-salesteste',
+            name: 'ListSalesteste',
+            component: listsalesteste,
+            
         },
 
         {

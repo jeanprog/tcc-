@@ -18,6 +18,11 @@ export default {
                     title: 'caixa',
                     icon: ' fas fa-donate',
                 },
+                 {
+                    href: '/listin-sales',
+                    title: 'vendas',
+                    icon: 'fas fa-shopping-cart',
+                },
                 {
                     href: '',
                     title: 'cadastro',
@@ -29,14 +34,15 @@ export default {
                         },
                     ],
                 },
-                {
-                    href: '/list-sales',
-                    title: 'vendas',
-                    icon: 'fas fa-shopping-cart',
-                },
+               
                 {
                     href: '/list-products',
                     title: 'estoque',
+                    icon: 'fas fa-tags',
+                },
+                 {
+                    href: '/list-salesteste',
+                    title: 'vendasteste',
                     icon: 'fas fa-tags',
                 },
                 {
