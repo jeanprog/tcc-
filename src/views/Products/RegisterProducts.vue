@@ -27,7 +27,7 @@
             <input
                 id="form-user-amount"
                 v-model="amount"
-                type="text"
+                type="number"
                 placeholder=""
             />
             <button type="submit">Salvar</button>

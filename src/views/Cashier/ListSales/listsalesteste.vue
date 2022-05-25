@@ -1,25 +1,31 @@
-<template>
-
-  
- <section class="list">
- <p>nome preço valor quantidade </p>
-     <ul>
-      <li class="collection-item" 
-        v-for="sales in listSales"
-        v-bind:key="sales.id" >
-         <div class= "dados" id="name"> {{sales.product }}</div>
+<template >
+  <div class="list">
+    <h1>VENDAS</h1>
+      <input type="search" placeholder="Search..." v-model="searchQuery" />
+      
+      
+   <h4>PRODUTO VALOR QUANTIDADE PAGAMENTO</h4>
+    
+    <div
+      class="collection-item"
+      v-for="sales in searchedSales"
+      :key="sales.id"
+     
+    >
+      
+      <div class= "dados" id="name"> {{sales.product }}</div>
      <div class= "dados" id="prince"> {{sales.prince}} </div>
      <div class= "dados" id="amount">   {{sales.amount}} </div>
-     <div class= "dados" id="payment">{{sales.payment}}</div>  
-      <div class='btn-delete' @click="deleteSales(sales)" >
-       <span class="fa fa-trash pointer" ></span>
-            </div>
-             <div class='btn-edit' @click="edit(sales.id)" >
-              <span class="fa fa-pen pointer"></span>
-              </div>
-              </li>
-              </ul>
- </section>
+     <div class= "dados" id="description">{{sales.payment}}</div>  
+      <div class='btn-delete' @click= "deleteSales(sales)">
+       <span class="fa fa-trash pointer"></span>
+       
+           
+            </div> 
+      
+    </div>
+  </div>
+  
 </template>
 
 // @ is an alias to /src
@@ -31,104 +37,151 @@ import { getSales } from '../service'
 import { ref } from 'vue';
 import {db} from '../../../config/firebase'
 
+import { computed, onMounted, reactive } from "vue";
 
 export default {
-    name: "listSales",
-    components: {},
-    data() {
-        return {
-         
-          listSales:[],
-        
-        };
-        
-    },
-
-     created (){
-      this.listar() 
-      },
-     
-     methods:{
-       listar() {
-        getSales().then((snapshot) => {
-          this.listSales = [];
-          snapshot.forEach( doc => {
-            console.log(doc);
-            let objectSales = {};
-                objectSales = doc.data ();
-                objectSales.id = doc.id;
-                
-            ref(this.listSales.push(objectSales));
-            
-          });
-        }); 
-      },
+  setup() {
+    const listSales = reactive([]);
+    const searchQuery = ref("");
+    const searchedSales = computed(() => {
+      return listSales.filter((sales) => {
+        return (
+          sales.product
+            .toLowerCase()
+            .indexOf(searchQuery.value.toLowerCase()) != -1
+        );
+      });
+    });
+    
+    
+    onMounted(async () => {
+      try {
+        const salesSnap = await db
+          .collection("sales")
+          .get();
+        salesSnap.forEach((doc) => {
+          let sales = doc.data();
+          sales.id = doc.id;
+          ref(listSales.push(sales));
+        });
+      } catch (e) {
+        console.log("Error Loading Products");
+      }
+    });
+    return { searchedSales, searchQuery };
+  
+  },
+methods: {
+  
+  
+  deleteSales(sales) {
+      console.log('evento acionado')
+      if (window.confirm("deseja mesmo deletar o produto?")) {
       
-     edit(idsales) {
-      this.$router.push({ name: 'cashier' , params: {id: idsales}})
-
-    },
-   
-
+      
+          db.collection('sales').doc(sales.id).delete().then(() => {
+           window.alert("produto deletado com sucesso")
+          
+            
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+      }
      
-    }
-}   
+     },
+}
+};
+
+    
+
 </script>
 
 <style scoped>
- 
+ h1 { 
+  position: relative; 
+  left: 550px;
+  top: 10px;
+
+ }
 .list {
  
   height: 90vh;
+  
+  
 }
-.list p {
+input { 
+    position: relative;
+    top: 60px!important;
+    left: 500px !important;
+    width: 350px;
+    border: 1px solid rgb(200, 200, 200);
+    outline: 0;
+    font-size: 15px;
+    padding: 7px;
+    border-radius: 10px;
+}
+h4 {
   margin-left:300px!important;
   justify-content: space-around;
+  position: relative;
+  top: 90px!important;
+  letter-spacing: 2px!important;
+  word-spacing: 10px!important; 
+  left: 30px!important;
 }
+
 .collection-item {
     margin-left: 300px!important;
-    display:flex;
     
+    display: flex;
     width: 60%;
     justify-content: space-around;
-    padding: 0.7%;
-    margin-bottom:40px;
+    padding: 0.9%;
+    border:solid white;
     
+    
+    position: relative;
+    top: 100px;
+    background-color: #D6DEE2
 }
 .dados {
-  border-right: 0.6px solid grey;
-  border-left: 0px solid grey;
+  
   padding: 0.9%; 
+  display: inline;
+ 
+  
   }
+  
   .pointer {
     cursor: pointer;
+    color: white;
+    left: 12px!important;
+    top: 9px!important;
+    position: relative!important;
 }
 
 .btn-delete  {
-  margin-left: 100px;
-  
+  margin-left: 150px;
+   background-color: #993399!important;
   position:relative;
-  
+ border-radius: 4px;
   width: 40px;
-
+  left: 20px;
 }
 
 .btn-edit {
- margin-left: 20px;
+  position:relative;
+  top: 10px;
+  left: 30px;
+  margin-left: 70px;
   width: 40px;
+  background-color: #993399!important;
+  border-radius: 4px;
+  border: solid;
+  
+  
 }
 
-#id {
-  min-width: 20%;
- 
-}
-#name {
-  min-width: 35%;
-}
-#amount {
-  min-width: 1%;
-}
-#price {
-  min-width: 25%;
-}
+
 </style>

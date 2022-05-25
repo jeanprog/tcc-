@@ -1,13 +1,14 @@
 <template>
-
-  
+<input type="search" placeholder="Pesquisar Venda" >
+<h4>PRODUTO VALOR QUANTIDADE PAGAMENTO </h4>  
  <section class="list">
- <p>nome preço valor quantidade </p>
+ 
      <ul>
       <li class="collection-item" 
         v-for="sales in listSales"
         v-bind:key="sales.id" >
          <div class= "dados" id="name"> {{sales.product }}</div>
+  
      <div class= "dados" id="prince"> {{sales.prince}} </div>
      <div class= "dados" id="amount">   {{sales.amount}} </div>
      <div class= "dados" id="payment">{{sales.payment}}</div>  
@@ -98,26 +99,48 @@ export default {
  
 .list {
  
-  height: 90vh;
+margin-top: 5%!important;
+  height: 70vh;
+  border: 1px solid #D6DEE2;
+  box-shadow: 15px 15px 10px #D6DEE2;
+  
 }
-.list p {
-  margin-left:300px!important;
+.list ul {
+  margin-top: 30px!important;
+}
+input { 
+    margin-top: 20px!important;
+    margin-left: 400px !important;
+    width: 350px;
+    border: 1px solid rgb(200, 200, 200);
+    outline: 0;
+    font-size: 15px;
+    padding: 7px;
+    border-radius: 10px;
+}
+h4 {
+  margin-left:350px!important;
   justify-content: space-around;
+  position: relative;
+  top: 40px!important;
+  letter-spacing: 2px!important;
+  word-spacing: 20px!important; 
 }
 .collection-item {
-    margin-left: 300px!important;
+ margin-left: 300px!important;
     display:flex;
-    
+    position: relative;
     width: 60%;
     justify-content: space-around;
-    padding: 0.7%;
-    margin-bottom:40px;
-    
+    padding: 0.9%;
+    margin-bottom:20px!important;
+    bottom: 50px!important;
 }
 .dados {
-  border-right: 0.6px solid grey;
+ border-right: 0px solid grey;
   border-left: 0px solid grey;
   padding: 0.9%; 
+  background-color: #D6DEE2
   }
   .pointer {
     cursor: pointer;
